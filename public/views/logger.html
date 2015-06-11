@@ -1,0 +1,30 @@
+<div>
+	<br></br>
+	<div class="list-group">
+		<div class="sidebar-offcanvas" id="sidebar">
+			<ul style="list-style: none;">
+				<h2>{{workoutName}}</h3>
+				<h4>Reps</h6>
+				<div style="width:30%">
+				<input type="text" name="input" ng-model="reps">
+				<h4>Weight</h6>
+				<input type="text" name="input" ng-model="weight">
+				<h4>Notes</h6>
+				<input type="text" name="input" ng-model="notes">
+				</div>
+				<br>
+				<button class="btn btn-primary btn-default" ng-click="logWorkout(reps, weight, notes)"> Log</button>
+			</ul>
+			<div>
+				<div ng-show="logs !== null" ng-repeat="log in logs.logs track by $index">
+					<h2>
+						Set {{$index+1}}: {{log.weight}}lbs {{log.reps}}x
+						<br>
+					</h2>
+  					 <!-- <h2>Set 1: {{log.weight}}lbs {{log.reps}}x</h2> -->
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,16 @@
+<div>
+	<br></br>
+	<div class="list-group">
+		<div class="sidebar-offcanvas" id="sidebar">
+			<ul style="list-style: none;">
+				<li ng-repeat="muscle in muscleGroups.muscleGroupList">
+					<a ng-href="#/exercise/{{muscle.name}}" class="list-group-item" ng-click="getExercisesByMuscleName(muscle.name)">
+						{{muscle.name}}
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div><!--/.sidebar-offcanvas-->
+		<div class="row fill" ui-view="main2"></div>
+
+</div>
