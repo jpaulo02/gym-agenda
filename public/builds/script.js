@@ -29947,7 +29947,7 @@ function setupModuleLoader(window) {
     /**
      * @ngdoc function
      * @name angular.module
-     * @module ng
+     * @modul ng
      * @description
      *
      * The `angular.module` is a global place for creating, registering and retrieving Angular
