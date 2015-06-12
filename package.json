@@ -11,6 +11,7 @@
     "express": "~4.11.1",
     "method-override": "~2.0.2",
     "morgan": "~1.5.1",
-    "request": "latest"
+    "request": "latest",
+    "grunt-contrib-sass": "~0.9.2"
   }
 }
