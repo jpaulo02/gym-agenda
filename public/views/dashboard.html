@@ -2,7 +2,7 @@
 	<br></br>
 	<div class="list-group">
 		<div class="sidebar-offcanvas" id="sidebar">
-			<ul style="list-style: none;">
+			<ul style="list-style: none; padding-left:0px;">
 				<li ng-repeat="muscle in muscleGroups.muscleGroupList">
 					<a ng-href="#/exercise/{{muscle.name}}" class="list-group-item" ng-click="getExercisesByMuscleName(muscle.name)">
 						{{muscle.name}}

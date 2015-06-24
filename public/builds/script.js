@@ -1,4 +1,4 @@
-/*! nmt 2015-06-11 */
+/*! nmt 2015-06-23 */
 //     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -71019,10 +71019,11 @@ angular.module('nmtApp', [
 .constant('nmtAppConfig',{
 	environment: {
 		dev: {
-			host: 'http://localhost:8090/gym-agenda'
+			//host: 'http://198.199.113.235:8080/gym-agenda'
+			host: 'http://localhost:8080/gym-agenda'
 		},
 		prod: {
-			host: 'http://104.236.186.185:8090/gym-agenda'
+			host: 'http://198.199.113.235:8080/gym-agenda'
 		}
 	}
 })
@@ -71135,9 +71136,10 @@ controller('WorkoutsController', ['DashboardService' ,'$scope', '$filter', '$sta
 	$scope.getExercisesByMuscleName();
 
 }]);;angular.module('nmtApp.controllers').
-controller('LoggerController', ['DashboardService' ,'$scope', '$filter', '$state', '$stateParams', '$rootScope', function(DashboardService, $scope, $filter, $state, $stateParams, $rootScope){ 
+controller('LoggerController', ['DashboardService' ,'$scope', '$filter', '$state', '$stateParams', '$rootScope', '$timeout', '$interval', function(DashboardService, $scope, $filter, $state, $stateParams, $rootScope, $timeout, $interval){ 
 	
 	$scope.loggedExercise = {
+		id: null,
 		workoutId: null,
 		reps: null,
 		weight: null,
@@ -71148,29 +71150,70 @@ controller('LoggerController', ['DashboardService' ,'$scope', '$filter', '$state
 
 	$scope.workoutId = $stateParams.id;
 	$scope.workoutName = $stateParams.name;
+	$scope.logId = null;
 	$scope.reps = null;
 	$scope.weight = null;
 	$scope.notes = null;
+	$scope.editLog = false;
+	$scope.timeRemaining = 60;
 
 	$scope.logWorkout = function(reps, weight, notes){
+		$scope.loggedExercise.id = $scope.logId;
 		$scope.loggedExercise.workoutId = $scope.workoutId;
 		$scope.loggedExercise.reps = reps;
 		$scope.loggedExercise.weight = weight;
 		$scope.loggedExercise.notes = notes;
-
-		$scope.logs.logs.push($scope.loggedExercise);
+		//$scope.logs.logs.push($scope.loggedExercise);
 		
-		DashboardService.logExercise($scope.loggedExercise).then(function(response){
-			$scope.logs = response;
-			console.log('logExercise',response);
-		});
+		if($scope.editLog){
+			DashboardService.updateLog($scope.loggedExercise).then(function(response){
+				$scope.logs = response;
+				$scope.editLog = false;
+				return;
+			});
+		}else{
+			DashboardService.logExercise($scope.loggedExercise).then(function(response){
+				$scope.logs = response;
+				$scope.editLog = false;
+			});
+		}
 	};
 
 	$scope.getLogByDateAndWorkoutId = function(){
 		DashboardService.getLogByDateAndWorkoutId($scope.workoutId).then(function(response){
 			$scope.logs = response;
-			console.log('logs',$scope.logs);
 		});
+	};
+
+	$scope.updateLog = function(id, weight, reps, notes, edit){
+		$scope.logId = id;
+		$scope.weight = Number(weight);
+		$scope.reps = Number(reps);
+		$scope.notes = notes;
+		$scope.editLog = edit;
+	};
+
+	$scope.loadLog = function(){
+
+	};
+
+	$scope.startTimer = function(){
+		if($scope.timeRemaining !== 60){
+			$scope.timeRemaining = 60;
+			return;
+		}
+
+		$interval($scope.minusOne, 1000, [60]);
+	};
+
+	$scope.minusOne = function(){
+		$scope.timeRemaining = $scope.timeRemaining-1;
+		if($scope.timeRemaining === 0){
+			var audio = new Audio('http://soundbible.com/mp3/glass_ping-Go445-1207030150.mp3');
+			audio.play();
+			$scope.timeRemaining = 60;
+			return;
+		}
 	};
 
 	$scope.getLogByDateAndWorkoutId($scope.workoutId);
@@ -71188,7 +71231,7 @@ factory('DashboardService', ['$log', 'GymService', function($log, GymService){
 			var self = this;
 			return GymService.oneUrl('muscleGroup/allMuscles').get().then(function(response){
 				self.muscleGroups = response;
-				$log.debug('getAllMuscleGroups', self.muscleGroups);
+				$log.debug('getAllMuscleGroups', response.plain());
 				return self.muscleGroups;
 			}, function(response){
 				$log.debug('error', response);
@@ -71199,7 +71242,7 @@ factory('DashboardService', ['$log', 'GymService', function($log, GymService){
 			var self = this;
 			return GymService.oneUrl('muscleGroup/getExercisesByMuscleName/'+ muscleName).get().then(function(response){
 				self.exercises = response;
-				$log.debug('getExercisesByMuscleName', self.exercises);
+				$log.debug('getExercisesByMuscleName', response.plain());
 				return self.exercises;
 			}, function(response){
 				$log.debug('error', response);
@@ -71210,7 +71253,7 @@ factory('DashboardService', ['$log', 'GymService', function($log, GymService){
 			var self = this;
 			return GymService.all('exerciseLog/logExercise').post(loggedExercise).then(function(response){
 				self.exerciseLog = response;
-				$log.debug('logWorkout', response);
+				$log.debug('logWorkout', response.plain());
 				return self.exerciseLog;
 			}, function(response){
 				$log.debug('error', response);
@@ -71221,12 +71264,24 @@ factory('DashboardService', ['$log', 'GymService', function($log, GymService){
 			var self = this;
 			return GymService.oneUrl('exerciseLog/getLogByDateAndWorkoutId/'+ wokroutId).get().then(function(response){
 				self.exerciseLog = response;
-				$log.debug('getLogByDateAndWorkoutId', self.exerciseLog);
+				$log.debug('getLogByDateAndWorkoutId', self.exerciseLog.plain());
 				return self.exerciseLog;
 			}, function(response){
 				$log.debug('error', response);
 			});
-		}
+		},
+
+		updateLog: function(loggedExercise){
+			var self = this;
+			console.log('brrruuuuhh',loggedExercise);
+			return GymService.all('exerciseLog/updateLog').post(loggedExercise).then(function(response){
+				self.exerciseLog = response;
+				$log.debug('updateLog', response.plain());
+				return self.exerciseLog;
+			}, function(response){
+				$log.debug('error', response);
+			});
+		},
 
 	};
 

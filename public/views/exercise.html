@@ -2,10 +2,11 @@
 	<br></br>
 	<div class="list-group">
 		<div class="sidebar-offcanvas" id="sidebar">
-			<ul style="list-style: none;">
+			<ul style="list-style: none; padding-left:0px;">
 				<li ng-repeat="exercise in exercises.exerciseList">
 					<a ng-href="#/exercise/{{exercise.id}}/{{exercise.name}}/log" class="list-group-item">
 						{{exercise.name}}
+						<i class="fa fa-check-circle-o pull-left" style="color:#2a9fd6;" ng-show="exercise.logs.length > 0"></i>
 					</a>
 				</li>
 			</ul>

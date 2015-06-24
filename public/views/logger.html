@@ -1,27 +1,31 @@
 <div>
 	<br>
-	<div class="list-group">
+	<div class="well well-sm list-group" style="background-color:#222; border-radius:4px;">
 		<div class="sidebar-offcanvas" id="sidebar">
-			<ul style="list-style: none;">
-				<h2>{{workoutName}}</h3>
+			<ul style="list-style: none; padding-left: 2%;">
+				<h2 style="margin-top:10px">{{workoutName}}</h3>
 				<h4>Weight</h6>
-				<div style="width:50%">
-					<input type="number" name="input" ng-model="weight">
+				<div>
+					<input style="width:30%" type="number" name="input" ng-model="weight">
+						<a>
+							<i ng-click="startTimer()" class="fa fa-clock-o fa-1x"> {{timeRemaining}}</i>
+						</a>
 					<h4>Reps</h4>
-					<input type="number" name="input" ng-model="reps">
+					<input style="width:30%" type="number" name="input" ng-model="reps">
 					<h4>Notes</h4>
-					<input style="background-color:white" type="text" name="input" ng-model="notes">
+					<input style="background-color:white; width:50%" type="text" name="input" ng-model="notes">
 				</div>
 				<br>
-				<button style="width:50%" class="btn btn-primary btn-sm" ng-click="logWorkout(reps, weight, notes)"> Log</button>
+				<button ng-show="!editLog" style="width:50%" class="btn btn-primary btn-sm" ng-click="logWorkout(reps, weight, notes)">Log</button>
+				<button ng-show="editLog" style="width:50%" class="btn btn-primary btn-sm" ng-click="logWorkout(reps, weight, notes)">Update Log</button>
 			</ul>
 			<div>
 				<div ng-show="logs !== null" ng-repeat="log in logs.logs track by $index">
 					<h3 style="margin-left:5%">
-						<a ng-click="edit(log.id, log.weight, log.reps, log.notes, true)" style="color:white">Set {{$index+1}}: {{log.weight}}lbs {{log.reps}}x
+						<a ng-click="updateLog(log.id, log.weight, log.reps, log.notes, true)" style="color:white">Set {{$index+1}}: {{log.weight}}lbs {{log.reps}}x
 						</a> 
 						<a ng-show="log.notes !== null">
-							<i style="margin-left:1%" class="fa fa-file-text-o"></i>
+							<i popover="{{log.notes}}" style="margin-left:1%" class="fa fa-file-text-o"></i>
 						</a>
 						<br>
 					</h3>
