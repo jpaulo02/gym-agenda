@@ -8,10 +8,27 @@
 				<div>
 					<input style="width:30%" type="number" name="input" ng-model="weight">
 						<a>
-							<i ng-click="startTimer()" class="fa fa-clock-o fa-1x"> {{timeRemaining}}</i>
+							<i ng-click="startTimer()" class="fa fa-clock-o fa-1x"></i>
+							<span>{{timeRemaining}}</span>
 						</a>
+						<div class="pull-right" style="padding-right: 45px;">
+							<a>
+								<i popover="Click Get Prior Logs" popover-trigger="mouseenter" ng-click="getLogDates()" class="fa fa-calendar fa-3x"></i>
+							</a>
+						</div>
 					<h4>Reps</h4>
 					<input style="width:30%" type="number" name="input" ng-model="reps">
+					<div class="well pull-right" ng-show="dates.length > 0" ng-hide="dates.length === 0">
+						<div ng-repeat="date in dates">
+							<h5><a ng-click="getLogByDateAndWorkoutId(date)">{{date}}</a></h5>
+						</div>
+					</div>
+					<div class="well pull-right" ng-show="logHistory.logs.length > 0" ng-hide="logHistory.logs === undefined" style="padding-top: 10px;padding-bottom: 10px;">
+						<h5 style="text-align:center;margin-top: 0px;margin-bottom: 15px;">{{date}}</h5>
+						<div ng-repeat="histLog in logHistory.logs track by $index">
+							<h5>Set {{$index+1}}: {{histLog.weight}}lbs {{histLog.reps}}x</h5>
+						</div>
+					</div>
 					<h4>Notes</h4>
 					<input style="background-color:white; width:50%" type="text" name="input" ng-model="notes">
 				</div>
@@ -21,14 +38,17 @@
 			</ul>
 			<div>
 				<div ng-show="logs !== null" ng-repeat="log in logs.logs track by $index">
-					<h3 style="margin-left:5%">
+					<h4 style="margin-left:5%">
 						<a ng-click="updateLog(log.id, log.weight, log.reps, log.notes, true)" style="color:white">Set {{$index+1}}: {{log.weight}}lbs {{log.reps}}x
 						</a> 
 						<a ng-show="log.notes !== null">
 							<i popover="{{log.notes}}" style="margin-left:1%" class="fa fa-file-text-o"></i>
 						</a>
 						<br>
-					</h3>
+					</h4>
+				</div>
+				<div>
+					
 				</div>
 			</div>
 		</div>

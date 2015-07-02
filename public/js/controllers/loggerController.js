@@ -10,6 +10,7 @@ controller('LoggerController', ['DashboardService' ,'$scope', '$filter', '$state
 	};
 
 	$scope.logs = [];
+	$scope.dates = [];
 
 	$scope.workoutId = $stateParams.id;
 	$scope.workoutName = $stateParams.name;
@@ -19,6 +20,8 @@ controller('LoggerController', ['DashboardService' ,'$scope', '$filter', '$state
 	$scope.notes = null;
 	$scope.editLog = false;
 	$scope.timeRemaining = 60;
+	$scope.date = null;
+	$scope.logHistory = null;
 
 	$scope.logWorkout = function(reps, weight, notes){
 		$scope.loggedExercise.id = $scope.logId;
@@ -42,9 +45,15 @@ controller('LoggerController', ['DashboardService' ,'$scope', '$filter', '$state
 		}
 	};
 
-	$scope.getLogByDateAndWorkoutId = function(){
-		DashboardService.getLogByDateAndWorkoutId($scope.workoutId).then(function(response){
-			$scope.logs = response;
+	$scope.getLogByDateAndWorkoutId = function(date, workoutId){
+		$scope.date = date;
+		$scope.dates = [];
+		DashboardService.getLogByDateAndWorkoutId($scope.date, $scope.workoutId).then(function(response){
+			if(date === null){
+				$scope.logs = response;
+			}else{
+				$scope.logHistory = response;
+			}
 		});
 	};
 
@@ -54,6 +63,14 @@ controller('LoggerController', ['DashboardService' ,'$scope', '$filter', '$state
 		$scope.reps = Number(reps);
 		$scope.notes = notes;
 		$scope.editLog = edit;
+	};
+
+	$scope.getLogDates = function(){
+		$scope.logHistory = null;
+		DashboardService.getLogDates($scope.workoutId).then(function(response){
+			$scope.dates = response;
+			console.log('$scope.dates',$scope.dates);
+		});
 	};
 
 	$scope.loadLog = function(){
@@ -79,6 +96,6 @@ controller('LoggerController', ['DashboardService' ,'$scope', '$filter', '$state
 		}
 	};
 
-	$scope.getLogByDateAndWorkoutId($scope.workoutId);
+	$scope.getLogByDateAndWorkoutId($scope.date, $scope.workoutId);
 
 }]);

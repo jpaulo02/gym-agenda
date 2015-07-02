@@ -6,6 +6,9 @@ factory('DashboardService', ['$log', 'GymService', function($log, GymService){
 		muscleGroups: null,
 		exercises: null,
 		exerciseLog: null,
+		dates: null,
+		logHistory: null,
+		dailyStatistics: null,
 
 		getAllMuscleGroups: function(){
 			var self = this;
@@ -29,6 +32,17 @@ factory('DashboardService', ['$log', 'GymService', function($log, GymService){
 			});
 		},
 
+		getDailyStatistics: function(){
+			var self = this;
+			return GymService.oneUrl('muscleGroup/getDailyStatistics').get().then(function(response){
+				self.dailyStatistics = response;
+				$log.debug('getDailyStatistics', response.plain());
+				return self.dailyStatistics;
+			}, function(response){
+				$log.debug('error', response);
+			});
+		},
+
 		logExercise: function(loggedExercise){
 			var self = this;
 			return GymService.all('exerciseLog/logExercise').post(loggedExercise).then(function(response){
@@ -40,12 +54,19 @@ factory('DashboardService', ['$log', 'GymService', function($log, GymService){
 			});
 		},
 
-		getLogByDateAndWorkoutId: function(wokroutId){
+		getLogByDateAndWorkoutId: function(date, workoutId){
+			console.log('date',date);
 			var self = this;
-			return GymService.oneUrl('exerciseLog/getLogByDateAndWorkoutId/'+ wokroutId).get().then(function(response){
-				self.exerciseLog = response;
-				$log.debug('getLogByDateAndWorkoutId', self.exerciseLog.plain());
-				return self.exerciseLog;
+			return GymService.oneUrl('exerciseLog/getLogByDateAndWorkoutId/workoutId/'+ workoutId + '/date/' + date).get().then(function(response){
+				if(date !== null){
+					self.logHistory = response;
+					$log.debug('getLogHistory', self.logHistory.plain());
+					return self.logHistory;
+				}else{
+					self.exerciseLog = response;
+					$log.debug('getLogByDateAndWorkoutId', self.exerciseLog.plain());
+					return self.exerciseLog;
+				}
 			}, function(response){
 				$log.debug('error', response);
 			});
@@ -53,7 +74,6 @@ factory('DashboardService', ['$log', 'GymService', function($log, GymService){
 
 		updateLog: function(loggedExercise){
 			var self = this;
-			console.log('brrruuuuhh',loggedExercise);
 			return GymService.all('exerciseLog/updateLog').post(loggedExercise).then(function(response){
 				self.exerciseLog = response;
 				$log.debug('updateLog', response.plain());
@@ -62,6 +82,17 @@ factory('DashboardService', ['$log', 'GymService', function($log, GymService){
 				$log.debug('error', response);
 			});
 		},
+
+		getLogDates: function(workoutId){
+			var self = this;
+			return GymService.oneUrl('exerciseLog/getLogDates/' + workoutId).get().then(function(response){
+				self.dates = response;
+				$log.debug('getLogDates', response.plain());
+				return self.dates;
+			}, function(response){
+				$log.debug('error', response);
+			});
+		}
 
 	};
 

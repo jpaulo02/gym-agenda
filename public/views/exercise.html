@@ -1,16 +1,27 @@
 <div>
-	<br></br>
+	<br>
+	<h3>Exercises</h3>
 	<div class="list-group">
 		<div class="sidebar-offcanvas" id="sidebar">
 			<ul style="list-style: none; padding-left:0px;">
 				<li ng-repeat="exercise in exercises.exerciseList">
 					<a ng-href="#/exercise/{{exercise.id}}/{{exercise.name}}/log" class="list-group-item">
-						{{exercise.name}}
+					{{exercise.name}}
 						<i class="fa fa-check-circle-o pull-left" style="color:#2a9fd6;" ng-show="exercise.logs.length > 0"></i>
 					</a>
 				</li>
 			</ul>
-			</div>
 		</div>
+		<h3>Daily Statistics</h3>
+		<div class="well">
+			Workout Duration: {{dailyStatistics.workoutDuration}}
+			<br>
+			 Avg Rest: {{dailyStatistics.avgRestTime}}
+			<br>
+			 Total Weight: {{dailyStatistics.totalWeight}}lbs
+			 <br>
+			 Total Reps: {{dailyStatistics.totalReps}}
+		</div>
+	</div>
 	<div ui-view="log"></div>
 </div>

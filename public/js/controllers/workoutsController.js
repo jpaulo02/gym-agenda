@@ -4,13 +4,19 @@ controller('WorkoutsController', ['DashboardService' ,'$scope', '$filter', '$sta
 	//console.log('username',$rootScope.username);
 
 	$scope.getExercisesByMuscleName = function(){
-		console.log('hit this function fhdaslk');
 		$scope.muscleName = $stateParams.name;
 		DashboardService.getExercisesByMuscleName($stateParams.name).then(function(response){
 			$scope.exercises = response;
 		});
 	};
 
-	$scope.getExercisesByMuscleName();
+	$scope.getDailyStatistics = function(){
+		$scope.firstLogTime = null;
+		DashboardService.getDailyStatistics().then(function(response){
+			$scope.dailyStatistics = response;
+		});
+	};
 
+	$scope.getExercisesByMuscleName();
+	$scope.getDailyStatistics();
 }]);

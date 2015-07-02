@@ -2,7 +2,7 @@
   "name": "nmt",
   "main": "server.js",
   "version": "0.0.1",
-  "author": "Andy Spock & Jeff",
+  "author": "Jeff",
   "dependencies": {
     "body-parser": "~1.10.2",
     "cookie-parser": "latest",
