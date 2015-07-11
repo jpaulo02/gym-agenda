@@ -1,4 +1,4 @@
-/*! nmt 2015-07-01 */
+/*! nmt 2015-07-10 */
 //     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -72741,8 +72741,8 @@ angular.module('nmtApp', [
 .constant('nmtAppConfig',{
 	environment: {
 		dev: {
-			//host: 'http://198.199.113.235:8080/gym-agenda'
-			host: 'http://localhost:8090/gym-agenda'
+			host: 'http://198.199.113.235:8080/gym-agenda'
+			//host: 'http://localhost:8090/gym-agenda'
 		},
 		prod: {
 			host: 'http://198.199.113.235:8080/gym-agenda'
