@@ -9,6 +9,7 @@ factory('DashboardService', ['$log', 'GymService', function($log, GymService){
 		dates: null,
 		logHistory: null,
 		dailyStatistics: null,
+		exerciseData: null,
 
 		getAllMuscleGroups: function(){
 			var self = this;
@@ -89,6 +90,17 @@ factory('DashboardService', ['$log', 'GymService', function($log, GymService){
 				self.dates = response;
 				$log.debug('getLogDates', response.plain());
 				return self.dates;
+			}, function(response){
+				$log.debug('error', response);
+			});
+		},
+
+		getGraphDataByExerciseId: function(exerciseId){
+			var self = this;
+			return GymService.oneUrl('exerciseLog/getGraphData/' + exerciseId).get().then(function(response){
+				self.exerciseData = response;
+				$log.debug('getGraphDataByExerciseId', response.plain());
+				return self.exerciseData;
 			}, function(response){
 				$log.debug('error', response);
 			});

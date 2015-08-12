@@ -36,6 +36,14 @@ angular.module('nmtApp')
 		data: {
 			contentPages: 1,
 		}
+	})
+	.state('graph', {
+		url: '/exercise/:id/:name/graph',
+		templateUrl: 'views/graph.html',
+		controller: 'DataController',
+		data: {
+			contentPages: 1,
+		}
 	})			
 	.state('log', {
 		url: '/exercise/:id/:name/log',

@@ -24,6 +24,10 @@
     "restangular": "latest",
     "moment": "latest",
     "mobile-angular-ui": "~1.2.0-beta.11",
-    "fontawesome": "~4.3.0"
+    "fontawesome": "~4.3.0",
+    "highcharts-release": "v4.1.4",
+    "highcharts-ng": "~0.0.8",
+    "angular-chart.js": "~0.7.2",
+    "Chart.js": "~1.0.2"
   }
 }

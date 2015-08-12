@@ -11,6 +11,8 @@ module.exports = function(grunt){
 		'public/libs/angular-bootstrap/ui-bootstrap-tpls.js',
 		'public/libs/angular-ui-router/release/angular-ui-router.js',
 		'public/libs/restangular/dist/restangular.js',
+		'public/libs/highcharts-ng/src/highcharts-ng.js',
+		'public/libs/highcharts-release/highcharts.src.js',
 		'public/libs/moment/moment.js',
 		'public/js/modules/nmt-App.js',
 		'public/js/modules/nmt-AppConfig.js',
@@ -20,6 +22,7 @@ module.exports = function(grunt){
 		'public/js/controllers/welcomeController.js',
 		'public/js/controllers/workoutsController.js',
 		'public/js/controllers/loggerController.js',
+		'public/js/controllers/dataController.js',
 		'public/js/services/**/*.js',
 		'public/js/filters/**/*.js'
 	],

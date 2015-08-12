@@ -57,6 +57,10 @@ controller('LoggerController', ['DashboardService' ,'$scope', '$filter', '$state
 		});
 	};
 
+	$scope.showGraph = function(){
+		console.log('$scope.workoutId',$scope.workoutId);
+	};
+
 	$scope.updateLog = function(id, weight, reps, notes, edit){
 		$scope.logId = id;
 		$scope.weight = Number(weight);
@@ -69,7 +73,6 @@ controller('LoggerController', ['DashboardService' ,'$scope', '$filter', '$state
 		$scope.logHistory = null;
 		DashboardService.getLogDates($scope.workoutId).then(function(response){
 			$scope.dates = response;
-			console.log('$scope.dates',$scope.dates);
 		});
 	};
 
@@ -95,6 +98,7 @@ controller('LoggerController', ['DashboardService' ,'$scope', '$filter', '$state
 			return;
 		}
 	};
+
 
 	$scope.getLogByDateAndWorkoutId($scope.date, $scope.workoutId);
 
