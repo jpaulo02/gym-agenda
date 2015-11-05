@@ -1,5 +1,5 @@
 angular.module('nmtApp.controllers').
-controller('LoggerController', ['DashboardService' ,'$scope', '$filter', '$state', '$stateParams', '$rootScope', '$timeout', '$interval', function(DashboardService, $scope, $filter, $state, $stateParams, $rootScope, $timeout, $interval){ 
+controller('LoggerController', ['DashboardService' ,'$scope', '$filter', '$state', '$stateParams', '$rootScope', '$timeout', '$interval', '$location', '$cookieStore', function(DashboardService, $scope, $filter, $state, $stateParams, $rootScope, $timeout, $interval, $location, $cookieStore){ 
 	
 	$scope.loggedExercise = {
 		id: null,
@@ -22,6 +22,20 @@ controller('LoggerController', ['DashboardService' ,'$scope', '$filter', '$state
 	$scope.timeRemaining = 60;
 	$scope.date = null;
 	$scope.logHistory = null;
+
+
+	if($rootScope.loggedIn === undefined){
+		$rootScope.loggedIn = $cookieStore.get('user');
+	}
+
+	$scope.$watch(function() { return $location.path(); }, function(newValue, oldValue){ 
+		console.log('hit here LoggerController'); 
+		console.log('$rootScope.loggedIn',$rootScope.loggedIn);
+		if ($rootScope.loggedIn === false && newValue != '/login'){  
+			console.log('entered if');
+			$location.path('/login'); 
+		}
+	});
 
 	$scope.logWorkout = function(reps, weight, notes){
 		$scope.loggedExercise.id = $scope.logId;

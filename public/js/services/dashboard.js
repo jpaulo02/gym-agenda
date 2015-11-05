@@ -3,6 +3,7 @@ factory('DashboardService', ['$log', 'GymService', function($log, GymService){
 
 	var DashboardService = {
 
+		user: null,
 		muscleGroups: null,
 		exercises: null,
 		exerciseLog: null,
@@ -10,6 +11,18 @@ factory('DashboardService', ['$log', 'GymService', function($log, GymService){
 		logHistory: null,
 		dailyStatistics: null,
 		exerciseData: null,
+
+		userLogin: function(user){
+			console.log('user', user);
+			var self = this;
+			return GymService.all('user/login').post(user).then(function(response){
+				self.user = response;
+				$log.debug('userLogin', response.plain());
+				return self.user;
+			}, function(response){
+				$log.debug('error', response);
+			});
+		},
 
 		getAllMuscleGroups: function(){
 			var self = this;

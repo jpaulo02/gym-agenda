@@ -1,7 +1,20 @@
 angular.module('nmtApp.controllers').
-controller('WorkoutsController', ['DashboardService' ,'$scope', '$filter', '$state', '$stateParams', '$rootScope', function(DashboardService, $scope, $filter, $state, $stateParams, $rootScope){ 
+controller('WorkoutsController', ['DashboardService' ,'$scope', '$filter', '$state', '$stateParams', '$rootScope', '$location', '$cookieStore', function(DashboardService, $scope, $filter, $state, $stateParams, $rootScope, $location, $cookieStore){ 
 	
-	//console.log('username',$rootScope.username);
+
+	if($rootScope.loggedIn === undefined){
+		$rootScope.loggedIn = $cookieStore.get('user');
+	}
+	
+	console.log('$cookieStore.loggedIn',$cookieStore.loggedIn);
+
+	$scope.$watch(function() { return $location.path(); }, function(newValue, oldValue){ 
+		console.log('hit here WorkoutsController'); 
+		if ($rootScope.loggedIn === false && newValue != '/login'){  
+			console.log('entered if');
+			$location.path('/login'); 
+		}
+	});
 
 	$scope.getExercisesByMuscleName = function(){
 		$scope.muscleName = $stateParams.name;
