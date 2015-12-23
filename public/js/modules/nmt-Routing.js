@@ -17,7 +17,7 @@ angular.module('nmtApp')
 	.state('login', {
 		url: '/login',
 		templateUrl: 'views/login.html',
-		controller: 'DashboardController',
+		controller: 'MainController',
 		data: {
 			contentPages: 1,
 		}
@@ -25,7 +25,7 @@ angular.module('nmtApp')
 	.state('home', {
 		url: '/home',
 		templateUrl: 'views/home.html',
-		controller: 'MainController',
+		controller: 'DashboardController',
 		data: {
 			contentPages: 1,
 		}

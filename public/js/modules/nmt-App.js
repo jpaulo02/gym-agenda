@@ -15,5 +15,7 @@ angular.module('nmtApp', [
 	'restangular',
 	'highcharts-ng',
 	'ngResource',
+	'ngTouch',
+	'mwl.calendar',
 	'angular-loading-bar'
 ]);

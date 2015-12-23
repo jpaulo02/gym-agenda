@@ -1,3 +1,7 @@
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/highcharts-more.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+
 <header id="header" data-ng-include="'views/template/header.html'"></header>
 
 <section id="main">
@@ -43,47 +47,20 @@
 
             </div>
 
-            <div class="card">
-                <div class="card-header">
-                    <h2>Sales Statistics <small>Vestibulum purus quam scelerisque, mollis nonummy metus</small></h2>
-
-                    <ul class="actions">
-                        <li>
-                            <a href="">
-                                <i class="zmdi zmdi-refresh-alt"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="">
-                                <i class="zmdi zmdi-download"></i>
-                            </a>
-                        </li>
-                        <li class="dropdown" dropdown>
-                            <a href="" dropdown-toggle>
-                                <i class="zmdi zmdi-more-vert"></i>
-                            </a>
-
-                            <ul class="dropdown-menu dropdown-menu-right">
-                                <li>
-                                    <a href="">Change Date Range</a>
-                                </li>
-                                <li>
-                                    <a href="">Change Graph Type</a>
-                                </li>
-                                <li>
-                                    <a href="">Other Settings</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div id="container2" style="height: 100%; margin: 0 auto"></div>
+                    </div>
                 </div>
-
-                <div class="card-body">
-                    <div class="chart-edge">
-                        <div class="flot-chart" data-curvedline-chart></div>
+                <div class="col-sm-6">
+                    <div class="card" ng-click="goToRoutine()" style="cursor: pointer;">
+                        <div><img ng-src='{{routineOrder[0].imgLocation}}'></div>
+                        <!-- "../style/img/routine-pics/biceps.png" alt=""></div> -->
                     </div>
                 </div>
             </div>
+
 
             <div class="mini-charts">
                 <div class="row">
@@ -263,7 +240,8 @@
             <div class="row">
                 <div class="col-sm-6">
                     <!-- Recent Items -->
-                    <div class="card" data-ng-controller="recentitemCtrl as rictrl">
+                    <div class="card" >
+                    <!-- data-ng-controller="recentitemCtrl as rictrl"> -->
                         <div class="card-header">
                             <h2>Recent Items <small>Phasellus condimentum ipsum id auctor imperdie</small></h2>
                             <ul class="actions">
@@ -309,7 +287,8 @@
                     </div>
 
                     <!-- Todo Lists -->
-                    <div id="todo-lists" data-ng-controller="todoCtrl as tctrl">
+                    <div id="todo-lists">
+                    <!-- data-ng-controller="todoCtrl as tctrl"> -->
                         <div class="tl-header">
                             <h2>Todo Lists</h2>
                             <small>Add, edit and manage your Todo Lists</small>
@@ -387,7 +366,8 @@
                     <div id="calendar-widget" data-full-calendar></div>
 
                     <!-- Recent Posts -->
-                    <div class="card" data-ng-controller="recentpostCtrl as rpctrl">
+                    <div class="card">
+                    <!-- data-ng-controller="recentpostCtrl as rpctrl"> -->
                         <div class="card-header ch-alt m-b-20">
                             <h2>Recent Posts <small>Phasellus condimentum ipsum id auctor imperdie</small></h2>
                             <ul class="actions">
@@ -450,4 +430,4 @@
     </section>
 </section>
 
-<footer id="footer" data-ng-include="'template/footer.html'"></footer>
+<!-- <footer id="footer" data-ng-include="'views/template/footer.html'"></footer> -->

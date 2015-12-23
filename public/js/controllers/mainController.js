@@ -20,8 +20,8 @@ controller('MainController', ['$scope', '$filter', '$state', '$stateParams', '$r
 			$rootScope.user = response;
 			$cookieStore.put('user',$rootScope.loggedIn);
 			if($rootScope.user.validated === true){
-				//$state.go('home', null, {location: true});
-				$state.go('dashboard', null, {location: true});
+				$state.go('home', null, {location: true});
+				//$state.go('dashboard', null, {location: true});
 			}
 		});
 		//$state.go('dashboard', {username: username}, {location: true});
@@ -43,6 +43,16 @@ controller('MainController', ['$scope', '$filter', '$state', '$stateParams', '$r
 			$scope.registerActive = false;
 			$scope.forgotActive = false;
 		}
+	};
+
+	$scope.openSearch = function(){
+		console.log('hit here MainController');
+			angular.element('#header').addClass('search-toggled');
+			//growlService.growl('Welcome back Mallinda Hollaway', 'inverse');
+	};
+
+	$scope.closeSearch = function(){
+			angular.element('#header').removeClass('search-toggled');
 	};
 
 }]);

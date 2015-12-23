@@ -42,7 +42,7 @@ controller('DataController', ['DashboardService' ,'$scope', '$filter', '$state',
 
 
 	var initiChart = function(){
-		$('#container').highcharts({
+		$('#container1').highcharts({
 			title: {
 				text: $scope.exerciseName,
 				x: -20 //center

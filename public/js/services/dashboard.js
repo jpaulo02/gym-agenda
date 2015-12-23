@@ -11,6 +11,8 @@ factory('DashboardService', ['$log', 'GymService', function($log, GymService){
 		logHistory: null,
 		dailyStatistics: null,
 		exerciseData: null,
+		daysExercised: null,
+		routineList: null,
 
 		userLogin: function(user){
 			console.log('user', user);
@@ -117,6 +119,29 @@ factory('DashboardService', ['$log', 'GymService', function($log, GymService){
 			}, function(response){
 				$log.debug('error', response);
 			});
+		},
+
+		getNumDaysWorkedOutByWeeks: function(numWeeks){
+			var self = this;
+			return GymService.oneUrl('home/getNumDaysWorkedOut/' + numWeeks).get().then(function(response){
+				self.daysExercised = response;
+				$log.debug('getNumDaysWorkedOutByWeeks', response);
+				return self.daysExercised;
+			}, function(response){
+				$log.debug('error', response);
+			});	
+		},
+
+		getRoutineOrder: function(userId){
+			var self = this;
+			return GymService.oneUrl('home/getRoutineOrder/' + userId).get().then(function(response){
+				console.log('response fdksjalf;dakjda',response.routineList);
+				self.routineList = response.routineList;
+				return self.routineList;
+			}, function(response){
+				$log.debug('error', response);
+			});
+
 		}
 
 	};

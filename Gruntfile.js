@@ -16,6 +16,8 @@ module.exports = function(grunt){
 		'public/libs/restangular/dist/restangular.js',
 		'public/libs/highcharts-ng/src/highcharts-ng.js',
 		'public/libs/highcharts-release/highcharts.src.js',
+		'public/libs/angular-bootstrap-calendar/dist/js/angular-bootstrap-calendar-tpls.min.js',
+		'public/libs/interact/dist/interact.min.js',
 		'public/libs/moment/moment.js',
 		'public/js/modules/nmt-App.js',
 		'public/js/modules/nmt-AppConfig.js',

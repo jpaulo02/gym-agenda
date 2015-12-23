@@ -1,4 +1,6 @@
-<div class="lc-block" id="l-login" data-ng-class="{ 'toggled': loginActive }" data-ng-if="loginActive" style="width: 735px;">
+<header id="header" data-ng-include="'views/template/header.html'"></header>
+
+<div class="lc-block" id="l-login" data-ng-class="{ 'toggled': loginActive }" data-ng-if="loginActive" style="width: 100%;">
     <div class="input-group m-b-20">
         <span class="input-group-addon"><i class="fa fa-user fa-2x"></i></span>
         <div class="fg-line">
@@ -32,7 +34,7 @@
 </div>
 
 <!-- Register -->
-<div class="lc-block" id="l-register" data-ng-class="{ 'toggled': registerActive }" data-ng-if="registerActive" style="width: 735px;">
+<div class="lc-block" id="l-register" data-ng-class="{ 'toggled': registerActive }" data-ng-if="registerActive" style="width: 100%;">
     <div class="input-group m-b-20">
         <span class="input-group-addon"><i class="fa fa-user fa-2x"></i></span>
         <div class="fg-line">
