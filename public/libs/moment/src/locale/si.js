@@ -16,8 +16,8 @@ export default moment.defineLocale('si', {
         LTS : 'a h:mm:ss',
         L : 'YYYY/MM/DD',
         LL : 'YYYY MMMM D',
-        LLL : 'YYYY MMMM D, LT',
-        LLLL : 'YYYY MMMM D [වැනි] dddd, LTS'
+        LLL : 'YYYY MMMM D, a h:mm',
+        LLLL : 'YYYY MMMM D [වැනි] dddd, a h:mm:ss'
     },
     calendar : {
         sameDay : '[අද] LT[ට]',
@@ -45,6 +45,10 @@ export default moment.defineLocale('si', {
     ordinalParse: /\d{1,2} වැනි/,
     ordinal : function (number) {
         return number + ' වැනි';
+    },
+    meridiemParse : /පෙර වරු|පස් වරු|පෙ.ව|ප.ව./,
+    isPM : function (input) {
+        return input === 'ප.ව.' || input === 'පස් වරු';
     },
     meridiem : function (hours, minutes, isLower) {
         if (hours > 11) {

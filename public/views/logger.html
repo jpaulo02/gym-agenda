@@ -3,7 +3,9 @@
 	<div class="list-group">
 		<div class="sidebar-offcanvas" id="sidebar">
 			<ul style="list-style: none; padding-left: 5%;">
-				<h2>{{workoutName}}</h3>
+				<h2>{{workoutName}}
+					<a class="fa fa-line-chart" ng-href="#/exercise/{{workoutId}}/{{workoutName}}/graph"></a>
+				</h3>
 				<h4>Weight</h6>
 				<div>
 					<input style="width:30%" type="number" name="input" ng-model="weight">

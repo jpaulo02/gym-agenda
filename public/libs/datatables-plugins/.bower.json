@@ -9,6 +9,6 @@
     "commit": "a94e328df63c79af43123b99ada5ff88d601a31d"
   },
   "_source": "git://github.com/DataTables/Plugins.git",
-  "_target": "~1.0.1",
+  "_target": "1.0.1",
   "_originalSource": "datatables-plugins"
 }

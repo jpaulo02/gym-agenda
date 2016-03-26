@@ -11,5 +11,6 @@ angular.module('nmtApp', [
 	'ngSanitize',
 	'ui.router',
 	'ui.bootstrap',
-	'restangular'
+	'restangular',
+	'highcharts-ng'
 ]);
