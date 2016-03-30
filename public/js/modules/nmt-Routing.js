@@ -17,6 +17,15 @@ angular.module('nmtApp')
 	.state('login', {
 		url: '/login',
 		templateUrl: 'views/login.html',
+		controller: 'MainController',
+		data: {
+			contentPages: 1,
+		}
+	})
+	.state('home', {
+		url: '/home',
+		templateUrl: 'views/home.html',
+		controller: 'DashboardController',
 		data: {
 			contentPages: 1,
 		}
@@ -33,6 +42,14 @@ angular.module('nmtApp')
 		url: '/exercise/:name',
 		templateUrl: 'views/exercise.html',
 		controller: 'WorkoutsController',
+		data: {
+			contentPages: 1,
+		}
+	})
+	.state('add', {
+		url: '/addExercise',
+		templateUrl: 'views/addExercise.html',
+		controller: 'DashboardController',
 		data: {
 			contentPages: 1,
 		}

@@ -2,8 +2,8 @@ angular.module('nmtApp')
 .constant('nmtAppConfig',{
 	environment: {
 		dev: {
-			host: 'http://198.199.113.235:8080/gym-agenda'
-			//host: 'http://localhost:8080/gym-agenda'
+			//host: 'http://198.199.113.235:8080/gym-agenda'
+			host: 'http://localhost:8080/gym-agenda'
 		},
 		prod: {
 			host: 'http://198.199.113.235:8080/gym-agenda'

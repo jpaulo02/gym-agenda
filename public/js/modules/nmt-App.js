@@ -8,9 +8,14 @@ angular.module('nmtApp', [
 	'nmtApp.directives',
 	'nmtApp.controllers',
 	'ngAnimate',
+    'ngCookies',
 	'ngSanitize',
 	'ui.router',
 	'ui.bootstrap',
 	'restangular',
-	'highcharts-ng'
+	'highcharts-ng',
+	'ngResource',
+	'ngTouch',
+	'mwl.calendar',
+	'angular-loading-bar'
 ]);

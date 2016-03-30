@@ -3,6 +3,7 @@ factory('DashboardService', ['$log', 'GymService', function($log, GymService){
 
 	var DashboardService = {
 
+		user: null,
 		muscleGroups: null,
 		exercises: null,
 		exerciseLog: null,
@@ -10,6 +11,20 @@ factory('DashboardService', ['$log', 'GymService', function($log, GymService){
 		logHistory: null,
 		dailyStatistics: null,
 		exerciseData: null,
+		daysExercised: null,
+		routineList: null,
+
+		userLogin: function(user){
+			console.log('user', user);
+			var self = this;
+			return GymService.all('user/login').post(user).then(function(response){
+				self.user = response;
+				$log.debug('userLogin', response.plain());
+				return self.user;
+			}, function(response){
+				$log.debug('error', response);
+			});
+		},
 
 		getAllMuscleGroups: function(){
 			var self = this;
@@ -104,6 +119,29 @@ factory('DashboardService', ['$log', 'GymService', function($log, GymService){
 			}, function(response){
 				$log.debug('error', response);
 			});
+		},
+
+		getNumDaysWorkedOutByWeeks: function(numWeeks){
+			var self = this;
+			return GymService.oneUrl('home/getNumDaysWorkedOut/' + numWeeks).get().then(function(response){
+				self.daysExercised = response;
+				$log.debug('getNumDaysWorkedOutByWeeks', response);
+				return self.daysExercised;
+			}, function(response){
+				$log.debug('error', response);
+			});	
+		},
+
+		getRoutineOrder: function(userId){
+			var self = this;
+			return GymService.oneUrl('home/getRoutineOrder/' + userId).get().then(function(response){
+				console.log('response fdksjalf;dakjda',response.routineList);
+				self.routineList = response.routineList;
+				return self.routineList;
+			}, function(response){
+				$log.debug('error', response);
+			});
+
 		}
 
 	};
